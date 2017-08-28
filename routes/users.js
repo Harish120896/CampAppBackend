@@ -53,10 +53,15 @@ router.get('/removeallcamps',function(req, res, next){
 router.get('/getbylocation/:lat/:lon',function(req, res, next){
   var lat = parseFloat(req.params.lat);
   var lon = parseFloat(req.params.lon);
-  Camp.find({location: {$near:[ lat , lon ],
+  geocoder.reverseGeocode( lat, lon, function ( err, data ) {
+  	Camp.find({location: {$near:[ lat , lon ],
        $maxDistance: 5}}, function(err, result){
-        res.json(result);
-    });   
+       	var obj = {};
+       	obj["results"] = result;
+       	obj['currentPosition'] = data.results[0].formatted_address;
+        res.json(obj);
+    });
+  });   
 });  
 
 module.exports = router;
