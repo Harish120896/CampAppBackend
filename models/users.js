@@ -10,11 +10,6 @@ var userSchema = new Schema({
     password: {
         type: String,
         required: true
-    },
-    position: {
-        type: String,
-        enum: ['manager', 'employee'], //can take only these specified values..
-        required: true
     }
 });
 
