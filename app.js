@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var mongoose = require('mongoose');
 
-var uri = "mongodb://localhost:27017/Camping";
+var uri = "";
 
 mongoose.Promise = global.Promise;
 

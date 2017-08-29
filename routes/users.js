@@ -2,6 +2,7 @@ var express = require('express');
 var passport = require('passport');
 var geocoder = require('geocoder');
 var Camp = require('../models/campDetails');
+var User = require('../models/users');
 require('../controllers/loginController')(passport);
 
 
@@ -48,6 +49,20 @@ router.get('/removeallcamps',function(req, res, next){
 		if(err) throw err;
 		res.json({"success":"deleted all jobs"});
 	})
+});
+
+router.get('/removeallusers',function(req, res, next){
+	User.remove({}).exec(function(err, user){
+		if(err) throw err;
+		res.json({"success":"removed all users"});
+	});
+});
+
+router.get('/getallusers',function(req, res, next){
+	User.find({}).exec(function(err,user){
+		if(err) throw err;
+		res.json(user);
+	});
 });
 
 router.get('/getbylocation/:lat/:lon',function(req, res, next){
